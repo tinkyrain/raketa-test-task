@@ -1,15 +1,15 @@
-### Контроллеры
+## Контроллеры
 
-## JsonResponse.php
+### JsonResponse.php
 1. Отделить Response класс от контроллеров 
-## GetProductsController.php
+### GetProductsController.php
 1. Опечатка в имени свойства productsVew (надо productsView) 
 2. Добавить обработку ошибок 
-## GetCartController.php
+### GetCartController.php
 1. При успешном ответе статус 404 
 2. Избыточная вложенность условий 
 3. public свойства вместо private  
-## AddToCartController.php
+### AddToCartController.php
 1. Метод добавления назван неккоректно 
 2. Нет проверки существования товара 
 3. Добавить обработку ошибок 
@@ -19,22 +19,22 @@
 1. Добавить абстрактный класс для контроллеров 
 2. Для каждой сущности свой каталог 
 
-### Domain
+## Domain
 
-## Cart
+### Cart
 1. Генерация UUID в конструкторе 
 2. имхо paymentMethod не относится к корзине, оно относится больше к самой оплате => выпилить 
-## Customer
+### Customer
 1. Везде UUID, а тут id клиента integer. Поменять на UUID 
-## Общее
+### Общее
 1. Для каждой сущности свой каталог  
 
-### Infrastructure
+## Infrastructure
 
-## Connector Exception
+### Connector Exception
 1. Вынести Exception 
 2. Можно просто extends Exception, вместо реализации Throwable 
-## Connector 
+### Connector 
 2. Для коннектора добавить интерфейс 
 3. Переменовать класс как RedisConnector вместо Connector 
 4. Readonly 
@@ -44,40 +44,40 @@
 8. Return в конструкторе  
 9. В set методе value сделать mixed
 10. Для has параметр key сделать string
-## ConnectorFacade
+### ConnectorFacade
 1. Вместо "Магических цифр" добавить константы 
 2. Предопределять данные для подключения в конструкторе 
 3. Сделать более универсальным благодаря фабрикам 
 4. Добавить обработку ошибок 
 5. readonly для свойств 
 
-### Repository
+## Repository
 
-## Product Entity
+### Product Entity
 1. ID при UUID 
 2. Да и сами бы Entity вынести
-## CartManager
+### CartManager
 1. Вынести CartManager (после чего переименовать в cart manager)
 2. Добавить типизацию
 3. setLogger убрать и передавать логгер в конструкторе
 4. Key и Session_id поменять местами в saveCart
 5. В методе getCart в new Cart передаётся не то
 6. saveCart должен возвращать bool, для дальнейшей обработки (условно вывести сообщение, что корзина не сохранилась)
-## Product Repository
+### Product Repository
 1. static fn (array $row): Product => $this->make($row) - this внутри внутри статической анонимной функции
 2. Вместо Exception я бы просто вернул false
 3. getByUuid и getByCategory - добавить экранирование данных для запроса
-## Общее
+### Общее
 1. Я бы вынес некоторые элементы из Domain в Entity.
    В Entity хранятся простые модели данных (такие как товар), а в Domain более сложные бизнес объекты что ли (Cart с методом addItem например).
 
-### Views
+## Views
 1. Добавить интерфейс с toArray()
 2. В CartView и ProductsView разный формат возвращаемых данных для товаров
 3. Мы делаем отдельный запрос к репозиторию для каждого товара
 4. declare(strict_types=1);
 
-### SQL
+## SQL
 
 1. Для нормализации category бы сделал отдельной таблицей и дальше foreing
 2. name имеет не совсем то описание, ему логичнее дать "Наименование товара"
